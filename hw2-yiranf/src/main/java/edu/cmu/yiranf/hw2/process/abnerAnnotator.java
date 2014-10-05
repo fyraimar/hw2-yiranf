@@ -7,6 +7,8 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
+import abner.Tagger;
+
 import edu.cmu.yiranf.hw2.types.GeneType;
 
 /**
@@ -15,11 +17,11 @@ import edu.cmu.yiranf.hw2.types.GeneType;
  * @author fyr
  *
  */
-public class geneDetectorAnnotator extends JCasAnnotator_ImplBase {
+public class abnerAnnotator extends JCasAnnotator_ImplBase {
   //lingpipeDetector ner;
   abnerGeneDetector abner;
   
-  public geneDetectorAnnotator() {
+  public abnerAnnotator() {
      //ner = new lingpipeDetector();
     abner = new abnerGeneDetector();
   }
