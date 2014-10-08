@@ -1,10 +1,10 @@
 package edu.cmu.yiranf.hw2.util;
 
-public class intPair {
+public class IntPair {
   int x = -1;
   int y = -1;
   
-  public intPair(int nx, int ny) {
+  public IntPair(int nx, int ny) {
     x = nx;
     y = ny;
   }
@@ -17,7 +17,7 @@ public class intPair {
     return y;
   }
   
-  public boolean equals(intPair opair) {
+  public boolean equals(IntPair opair) {
     return opair.x == x && opair.y == y;
   }
 }

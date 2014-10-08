@@ -21,7 +21,7 @@ import com.aliasi.util.AbstractExternalizable;
 
 import edu.cmu.yiranf.hw2.types.CandidateToken;
 import edu.cmu.yiranf.hw2.types.GeneType;
-import edu.cmu.yiranf.hw2.util.intPair;
+import edu.cmu.yiranf.hw2.util.IntPair;
 
 /**
  * geneDetectorAnnotator works as the analysis engine of the system. It only accepts the context of the sentence
@@ -48,8 +48,8 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
   }
 
   
-  public Map<intPair, Double> detect(String text) throws Exception {
-    Map<intPair, Double> tokens = new HashMap<intPair, Double>();
+  public Map<IntPair, Double> detect(String text) throws Exception {
+    Map<IntPair, Double> tokens = new HashMap<IntPair, Double>();
     
     char[] cs = text.toCharArray();
     Iterator<Chunk> it = chunker.nBestChunks(cs, 0, cs.length, 80);
@@ -59,7 +59,7 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
       int start = chunk.start();
       int end = chunk.end();
       
-      tokens.put(new intPair(start, end), conf);
+      tokens.put(new IntPair(start, end), conf);
     }
     
     return tokens;
@@ -78,23 +78,23 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
     // TODO Auto-generated method stub
     String sts = aJCas.getDocumentText();
     
-    Map<intPair, Double> abnerTokens = new HashMap<intPair, Double>();
+    Map<IntPair, Double> abnerTokens = new HashMap<IntPair, Double>();
     Iterator annotationIter = aJCas.getAnnotationIndex(CandidateToken.type).iterator();
     while (annotationIter.hasNext()) {
       CandidateToken annot = (CandidateToken) annotationIter.next();
-      abnerTokens.put(new intPair(annot.getSt(), annot.getEd()), 1.0);
+      abnerTokens.put(new IntPair(annot.getSt(), annot.getEd()), 1.0);
     }
 
     try {
-      Map<intPair, Double> tokens = detect(sts);
+      Map<IntPair, Double> tokens = detect(sts);
       
       Iterator it = tokens.entrySet().iterator();
       while (it.hasNext()) {
-        Map.Entry<intPair, Double> pairs = (Map.Entry<intPair, Double>)it.next();
+        Map.Entry<IntPair, Double> pairs = (Map.Entry<IntPair, Double>)it.next();
         
         double conf = pairs.getValue();
-        if (abnerTokens.get((intPair)pairs.getKey()) != null) {
-          conf += abnerTokens.get((intPair)pairs.getKey());
+        if (abnerTokens.get((IntPair)pairs.getKey()) != null) {
+          conf += abnerTokens.get((IntPair)pairs.getKey());
         }
         else {
           conf -= 0.1;
