@@ -1,14 +1,10 @@
 package edu.cmu.yiranf.hw2.process;
 
-import java.util.Iterator;
-import java.util.Map;
-
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
-import abner.Tagger;
-
+import edu.cmu.yiranf.hw2.types.CandidateToken;
 import edu.cmu.yiranf.hw2.types.GeneType;
 
 /**
@@ -37,36 +33,18 @@ public class abnerAnnotator extends JCasAnnotator_ImplBase {
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
     // TODO Auto-generated method stub
-    String sts = aJCas.getDocumentText();  
+    String sts = aJCas.getDocumentText();
     String[] tokens = abner.process(sts);
     
     for (String token : tokens) {
       int st = sts.indexOf(token);
       if (st < 0 || st + token.length() > sts.length()) continue;
-      GeneType annotation = new GeneType(aJCas);
-      System.out.println(sts.indexOf(token));
+      CandidateToken annotation = new CandidateToken(aJCas);
+      
       annotation.setSt(sts.indexOf(token));
       annotation.setEd(sts.indexOf(token) + token.length());
       
       annotation.addToIndexes();
     }
-    /*
-    try {
-      Map<Integer, Integer> tokens = ner.detect(sts);
-      
-      Iterator it = tokens.entrySet().iterator();
-      while (it.hasNext()) {
-        Map.Entry<Integer, Integer> pairs = (Map.Entry<Integer, Integer>)it.next();
-        GeneType annotation = new GeneType(aJCas);
-
-        annotation.setSt((Integer)pairs.getKey());
-        annotation.setEd((Integer)pairs.getValue());
-        annotation.addToIndexes();
-      }
-    } catch (Exception e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    */
   }
 }

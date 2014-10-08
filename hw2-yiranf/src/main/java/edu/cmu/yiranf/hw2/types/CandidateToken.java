@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Wed Sep 24 12:58:45 EDT 2014 */
+/* First created by JCasGen Tue Oct 07 20:22:13 EDT 2014 */
 package edu.cmu.yiranf.hw2.types;
 
 import org.apache.uima.jcas.JCas; 
@@ -14,12 +14,12 @@ import org.apache.uima.jcas.tcas.Annotation;
  * Updated by JCasGen Tue Oct 07 20:22:13 EDT 2014
  * XML source: /Users/yiranfei/git/hw2-yiranf/hw2-yiranf/src/main/resources/typeSystemDescriptor.xml
  * @generated */
-public class GeneType extends Annotation {
+public class CandidateToken extends Annotation {
   /** @generated
    * @ordered 
    */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = JCasRegistry.register(GeneType.class);
+  public final static int typeIndexID = JCasRegistry.register(CandidateToken.class);
   /** @generated
    * @ordered 
    */
@@ -33,14 +33,14 @@ public class GeneType extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected GeneType() {/* intentionally empty block */}
+  protected CandidateToken() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated
    * @param addr low level Feature Structure reference
    * @param type the type of this Feature Structure 
    */
-  public GeneType(int addr, TOP_Type type) {
+  public CandidateToken(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
@@ -48,7 +48,7 @@ public class GeneType extends Annotation {
   /** @generated
    * @param jcas JCas to which this Feature Structure belongs 
    */
-  public GeneType(JCas jcas) {
+  public CandidateToken(JCas jcas) {
     super(jcas);
     readObject();   
   } 
@@ -58,7 +58,7 @@ public class GeneType extends Annotation {
    * @param begin offset to the begin spot in the SofA
    * @param end offset to the end spot in the SofA 
   */  
-  public GeneType(JCas jcas, int begin, int end) {
+  public CandidateToken(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
     setEnd(end);
@@ -84,18 +84,18 @@ public class GeneType extends Annotation {
    * @return value of the feature 
    */
   public int getSt() {
-    if (GeneType_Type.featOkTst && ((GeneType_Type)jcasType).casFeat_st == null)
-      jcasType.jcas.throwFeatMissing("st", "edu.cmu.yiranf.hw2.types.GeneType");
-    return jcasType.ll_cas.ll_getIntValue(addr, ((GeneType_Type)jcasType).casFeatCode_st);}
+    if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_st == null)
+      jcasType.jcas.throwFeatMissing("st", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_st);}
     
   /** setter for st - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setSt(int v) {
-    if (GeneType_Type.featOkTst && ((GeneType_Type)jcasType).casFeat_st == null)
-      jcasType.jcas.throwFeatMissing("st", "edu.cmu.yiranf.hw2.types.GeneType");
-    jcasType.ll_cas.ll_setIntValue(addr, ((GeneType_Type)jcasType).casFeatCode_st, v);}    
+    if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_st == null)
+      jcasType.jcas.throwFeatMissing("st", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    jcasType.ll_cas.ll_setIntValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_st, v);}    
    
     
   //*--------------*
@@ -106,18 +106,18 @@ public class GeneType extends Annotation {
    * @return value of the feature 
    */
   public int getEd() {
-    if (GeneType_Type.featOkTst && ((GeneType_Type)jcasType).casFeat_ed == null)
-      jcasType.jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.GeneType");
-    return jcasType.ll_cas.ll_getIntValue(addr, ((GeneType_Type)jcasType).casFeatCode_ed);}
+    if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_ed == null)
+      jcasType.jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_ed);}
     
   /** setter for ed - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setEd(int v) {
-    if (GeneType_Type.featOkTst && ((GeneType_Type)jcasType).casFeat_ed == null)
-      jcasType.jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.GeneType");
-    jcasType.ll_cas.ll_setIntValue(addr, ((GeneType_Type)jcasType).casFeatCode_ed, v);}    
+    if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_ed == null)
+      jcasType.jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    jcasType.ll_cas.ll_setIntValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_ed, v);}    
   }
 
     

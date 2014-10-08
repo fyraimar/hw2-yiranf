@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Wed Sep 24 12:58:45 EDT 2014 */
+/* First created by JCasGen Tue Oct 07 20:22:14 EDT 2014 */
 package edu.cmu.yiranf.hw2.types;
 
 import org.apache.uima.jcas.JCas;
@@ -14,9 +14,9 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue Oct 07 20:22:13 EDT 2014
+ * Updated by JCasGen Tue Oct 07 20:22:14 EDT 2014
  * @generated */
-public class GeneType_Type extends Annotation_Type {
+public class CandidateToken_Type extends Annotation_Type {
   /** @generated 
    * @return the generator for this type
    */
@@ -26,25 +26,25 @@ public class GeneType_Type extends Annotation_Type {
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
-  			 if (GeneType_Type.this.useExistingInstance) {
+  			 if (CandidateToken_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
-  		     FeatureStructure fs = GeneType_Type.this.jcas.getJfsFromCaddr(addr);
+  		     FeatureStructure fs = CandidateToken_Type.this.jcas.getJfsFromCaddr(addr);
   		     if (null == fs) {
-  		       fs = new GeneType(addr, GeneType_Type.this);
-  			   GeneType_Type.this.jcas.putJfsFromCaddr(addr, fs);
+  		       fs = new CandidateToken(addr, CandidateToken_Type.this);
+  			   CandidateToken_Type.this.jcas.putJfsFromCaddr(addr, fs);
   			   return fs;
   		     }
   		     return fs;
-        } else return new GeneType(addr, GeneType_Type.this);
+        } else return new CandidateToken(addr, CandidateToken_Type.this);
   	  }
     };
   /** @generated */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = GeneType.typeIndexID;
+  public final static int typeIndexID = CandidateToken.typeIndexID;
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.yiranf.hw2.types.GeneType");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.yiranf.hw2.types.CandidateToken");
  
   /** @generated */
   final Feature casFeat_st;
@@ -56,7 +56,7 @@ public class GeneType_Type extends Annotation_Type {
    */ 
   public int getSt(int addr) {
         if (featOkTst && casFeat_st == null)
-      jcas.throwFeatMissing("st", "edu.cmu.yiranf.hw2.types.GeneType");
+      jcas.throwFeatMissing("st", "edu.cmu.yiranf.hw2.types.CandidateToken");
     return ll_cas.ll_getIntValue(addr, casFeatCode_st);
   }
   /** @generated
@@ -65,7 +65,7 @@ public class GeneType_Type extends Annotation_Type {
    */    
   public void setSt(int addr, int v) {
         if (featOkTst && casFeat_st == null)
-      jcas.throwFeatMissing("st", "edu.cmu.yiranf.hw2.types.GeneType");
+      jcas.throwFeatMissing("st", "edu.cmu.yiranf.hw2.types.CandidateToken");
     ll_cas.ll_setIntValue(addr, casFeatCode_st, v);}
     
   
@@ -80,7 +80,7 @@ public class GeneType_Type extends Annotation_Type {
    */ 
   public int getEd(int addr) {
         if (featOkTst && casFeat_ed == null)
-      jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.GeneType");
+      jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.CandidateToken");
     return ll_cas.ll_getIntValue(addr, casFeatCode_ed);
   }
   /** @generated
@@ -89,7 +89,7 @@ public class GeneType_Type extends Annotation_Type {
    */    
   public void setEd(int addr, int v) {
         if (featOkTst && casFeat_ed == null)
-      jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.GeneType");
+      jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.CandidateToken");
     ll_cas.ll_setIntValue(addr, casFeatCode_ed, v);}
     
   
@@ -101,7 +101,7 @@ public class GeneType_Type extends Annotation_Type {
 	 * @param jcas JCas
 	 * @param casType Type 
 	 */
-  public GeneType_Type(JCas jcas, Type casType) {
+  public CandidateToken_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 

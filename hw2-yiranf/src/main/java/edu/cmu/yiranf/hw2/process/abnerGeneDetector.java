@@ -16,7 +16,7 @@ public class abnerGeneDetector {
     
     for (int i = 0; i < ents[0].length; i++) {
       ret[i] = ents[0][i];
-      System.out.println(ents[0][i]);
+      //System.out.println(ents[0][i]);
     }
     
     return ret;

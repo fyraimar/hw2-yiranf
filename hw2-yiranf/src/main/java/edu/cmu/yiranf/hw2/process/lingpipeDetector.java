@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import edu.cmu.yiranf.hw2.util.intPair;
+
 /**
  * This class wraps the lingpipe detector under the Alias-i Royalty Free License.
  * 
@@ -62,8 +64,8 @@ public class lingpipeDetector {
    * The algorithm compare the differences between the name in the sentence and the gene type model and get a confidence value.
    * This function outputs entities whose confidence values are above log(0.63). This specific value has the best performance during the test.
    */
-  public Map<Integer, Integer> detect(String text) throws Exception {
-    Map<Integer, Integer> tokens = new HashMap<Integer, Integer>();
+  public Map<intPair, Double> detect(String text) throws Exception {
+    Map<intPair, Double> tokens = new HashMap<intPair, Double>();
     
     char[] cs = text.toCharArray();
     Iterator<Chunk> it = chunker.nBestChunks(cs, 0, cs.length, 80);
@@ -72,9 +74,8 @@ public class lingpipeDetector {
       double conf = Math.pow(2.0,chunk.score());
       int start = chunk.start();
       int end = chunk.end();
-      if (conf > 0.63) {
-        tokens.put(start, end);
-      }
+      
+      tokens.put(new intPair(start, end), conf);
     }
     
     return tokens;
