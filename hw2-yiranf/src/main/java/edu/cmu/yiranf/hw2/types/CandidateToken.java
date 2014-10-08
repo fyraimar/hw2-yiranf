@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue Oct 07 20:22:13 EDT 2014
- * XML source: /Users/yiranfei/git/hw2-yiranf/hw2-yiranf/src/main/resources/typeSystemDescriptor.xml
+ * Updated by JCasGen Wed Oct 08 08:11:00 EDT 2014
+ * XML source: /Users/yiranfei/git/hw2-yiranf/hw2-yiranf/src/main/resources/descriptors/typeSystemDescriptor.xml
  * @generated */
 public class CandidateToken extends Annotation {
   /** @generated

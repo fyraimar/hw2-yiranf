@@ -2,10 +2,10 @@ package edu.cmu.yiranf.hw2.process;
 
 import abner.*;
 
-public class abnerGeneDetector {
+public class AbnerGeneDetector {
   Tagger t;
   
-  public abnerGeneDetector() {
+  public AbnerGeneDetector() {
     System.out.println("Running abner.");
     t = new Tagger();
   }

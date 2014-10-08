@@ -13,13 +13,13 @@ import edu.cmu.yiranf.hw2.types.GeneType;
  * @author fyr
  *
  */
-public class abnerAnnotator extends JCasAnnotator_ImplBase {
+public class AbnerAnnotator extends JCasAnnotator_ImplBase {
   //lingpipeDetector ner;
-  abnerGeneDetector abner;
+  AbnerGeneDetector abner;
   
-  public abnerAnnotator() {
+  public AbnerAnnotator() {
      //ner = new lingpipeDetector();
-    abner = new abnerGeneDetector();
+    abner = new AbnerGeneDetector();
   }
   
   /**

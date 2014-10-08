@@ -21,7 +21,7 @@
    -->
 <casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
     <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-    <implementationName>edu.cmu.yiranf.hw2.process.casPrinter</implementationName>
+    <implementationName>edu.cmu.yiranf.hw2.process.CasPrinter</implementationName>
 	<processingResourceMetaData>
 		<name>Annotation Printer</name>
 		<description>Prints annotations.</description>
@@ -36,20 +36,15 @@
 				<mandatory>false</mandatory>
 			</configurationParameter>
 		</configurationParameters>
-		<configurationParameterSettings>
-			<nameValuePair>
-				<name>outputFile</name>
-				<value>
-					<string>hw2-yiranf.out</string>
-				</value>
-			</nameValuePair>
-		</configurationParameterSettings>
-		<typeSystemDescription>
+		<configurationParameterSettings/>
+    <typeSystemDescription>
       <imports>
         <import location="typeSystemDescriptor.xml"/>
       </imports>
     </typeSystemDescription>
-		<capabilities>
+		<typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
 			<capability>
 				<inputs>
 					<type allAnnotatorFeatures="true">org.apache.uima.examples.SourceDocumentInformation</type>

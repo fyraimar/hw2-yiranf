@@ -49,7 +49,7 @@ import edu.cmu.yiranf.hw2.types.Sentence;
  * @author fyr
  *
  */
-public class collectionReader extends CollectionReader_ImplBase {
+public class CollectionReader extends CollectionReader_ImplBase {
   public static final String INPUT_PATH = "InputDirectory";
   private ArrayList<String> mSentences;
   private int mCurrentIndex;

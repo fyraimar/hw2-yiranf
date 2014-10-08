@@ -46,17 +46,17 @@ import edu.cmu.yiranf.hw2.types.Sentence;
  * @author fyr
  *
  */
-public class casPrinter extends CasConsumer_ImplBase implements CasObjectProcessor {
+public class CasPrinter extends CasConsumer_ImplBase implements CasObjectProcessor {
   File outFile;
   FileWriter fileWriter;
 
-  public casPrinter() {
+  public CasPrinter() {
   }
 
   public void initialize() throws ResourceInitializationException {
 
     // Create the output file
-    outFile = new File(((String) getUimaContext().getConfigParameterValue("outputFile")).trim());
+    outFile = new File("hw2-yiranf.out");
     try {
       fileWriter = new FileWriter(outFile);
     } catch (IOException e) {

@@ -4,10 +4,10 @@
   <primitive>false</primitive>  
   <delegateAnalysisEngineSpecifiers>
     <delegateAnalysisEngine key="abnerAEDescriptor">
-      <import location="abnerAEDescriptor.xml"/>
+      <import location="descriptors/abnerAEDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="lingpipeAEDescriptor">
-      <import location="lingpipeAEDescriptor.xml"/>
+      <import location="descriptors/lingpipeAEDescriptor.xml"/>
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>

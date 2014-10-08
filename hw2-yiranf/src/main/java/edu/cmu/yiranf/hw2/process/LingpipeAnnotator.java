@@ -1,12 +1,23 @@
 package edu.cmu.yiranf.hw2.process;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceAccessException;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
+
+import com.aliasi.chunk.Chunk;
+import com.aliasi.chunk.ConfidenceChunker;
+import com.aliasi.util.AbstractExternalizable;
 
 import edu.cmu.yiranf.hw2.types.CandidateToken;
 import edu.cmu.yiranf.hw2.types.GeneType;
@@ -18,11 +29,40 @@ import edu.cmu.yiranf.hw2.util.intPair;
  * @author fyr
  *
  */
-public class lingpipeAnnotator extends JCasAnnotator_ImplBase {
-  lingpipeDetector ner;
+public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
+  static ConfidenceChunker chunker;
   
-  public lingpipeAnnotator() {
-    ner = new lingpipeDetector();
+  public void initialize(UimaContext aContext) throws ResourceInitializationException {
+    super.initialize(aContext);
+    
+    try {
+      System.out.println((String) aContext.getConfigParameterValue("GeneModelFile"));
+      chunker = (ConfidenceChunker) AbstractExternalizable.readResourceObject(LingpipeAnnotator.class, (String) aContext.getConfigParameterValue("GeneModelFile"));
+    } catch (ClassNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
+
+  
+  public Map<intPair, Double> detect(String text) throws Exception {
+    Map<intPair, Double> tokens = new HashMap<intPair, Double>();
+    
+    char[] cs = text.toCharArray();
+    Iterator<Chunk> it = chunker.nBestChunks(cs, 0, cs.length, 80);
+    while (it.hasNext()) {
+      Chunk chunk = it.next();
+      double conf = Math.pow(2.0,chunk.score());
+      int start = chunk.start();
+      int end = chunk.end();
+      
+      tokens.put(new intPair(start, end), conf);
+    }
+    
+    return tokens;
   }
   
   /**
@@ -46,7 +86,7 @@ public class lingpipeAnnotator extends JCasAnnotator_ImplBase {
     }
 
     try {
-      Map<intPair, Double> tokens = ner.detect(sts);
+      Map<intPair, Double> tokens = detect(sts);
       
       Iterator it = tokens.entrySet().iterator();
       while (it.hasNext()) {
