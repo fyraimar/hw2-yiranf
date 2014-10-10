@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Wed Oct 08 08:11:00 EDT 2014
+ * Updated by JCasGen Fri Oct 10 15:57:36 EDT 2014
  * XML source: /Users/yiranfei/git/hw2-yiranf/hw2-yiranf/src/main/resources/descriptors/typeSystemDescriptor.xml
  * @generated */
 public class CandidateToken extends Annotation {
@@ -118,6 +118,50 @@ public class CandidateToken extends Annotation {
     if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_ed == null)
       jcasType.jcas.throwFeatMissing("ed", "edu.cmu.yiranf.hw2.types.CandidateToken");
     jcasType.ll_cas.ll_setIntValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_ed, v);}    
+   
+    
+  //*--------------*
+  //* Feature: score
+
+  /** getter for score - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public double getScore() {
+    if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_score == null)
+      jcasType.jcas.throwFeatMissing("score", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    return jcasType.ll_cas.ll_getDoubleValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_score);}
+    
+  /** setter for score - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setScore(double v) {
+    if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_score == null)
+      jcasType.jcas.throwFeatMissing("score", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    jcasType.ll_cas.ll_setDoubleValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_score, v);}    
+   
+    
+  //*--------------*
+  //* Feature: processID
+
+  /** getter for processID - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public int getProcessID() {
+    if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_processID == null)
+      jcasType.jcas.throwFeatMissing("processID", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_processID);}
+    
+  /** setter for processID - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setProcessID(int v) {
+    if (CandidateToken_Type.featOkTst && ((CandidateToken_Type)jcasType).casFeat_processID == null)
+      jcasType.jcas.throwFeatMissing("processID", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    jcasType.ll_cas.ll_setIntValue(addr, ((CandidateToken_Type)jcasType).casFeatCode_processID, v);}    
   }
 
     

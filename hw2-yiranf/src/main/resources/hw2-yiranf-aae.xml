@@ -9,6 +9,9 @@
     <delegateAnalysisEngine key="lingpipeAEDescriptor">
       <import location="descriptors/lingpipeAEDescriptor.xml"/>
     </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="mergeAEDescriptor">
+      <import location="descriptors/mergeAEDescriptor.xml"/>
+    </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
     <name>aaeDescriptor</name>
@@ -21,6 +24,7 @@
       <fixedFlow>
         <node>abnerAEDescriptor</node>
         <node>lingpipeAEDescriptor</node>
+      <node>mergeAEDescriptor</node>
       </fixedFlow>
     </flowConstraints>
     <typePriorities/>

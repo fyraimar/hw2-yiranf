@@ -24,91 +24,76 @@ import edu.cmu.yiranf.hw2.types.GeneType;
 import edu.cmu.yiranf.hw2.util.IntPair;
 
 /**
- * geneDetectorAnnotator works as the analysis engine of the system. It only accepts the context of the sentence
- * and return the position of each gene name entities.
+ * geneDetectorAnnotator works as the analysis engine of the system. It only accepts the context of
+ * the sentence and return the position of each gene name entities.
+ * 
  * @author fyr
  *
  */
 public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
-  static ConfidenceChunker chunker;
-  
+  static final int PROCESS_ID = 2;
+
+  static ConfidenceChunker sChunker;
+
   public void initialize(UimaContext aContext) throws ResourceInitializationException {
     super.initialize(aContext);
-    
+
     try {
       System.out.println((String) aContext.getConfigParameterValue("GeneModelFile"));
-      chunker = (ConfidenceChunker) AbstractExternalizable.readResourceObject(LingpipeAnnotator.class, (String) aContext.getConfigParameterValue("GeneModelFile"));
+      sChunker = (ConfidenceChunker) AbstractExternalizable.readResourceObject(
+              LingpipeAnnotator.class, (String) aContext.getConfigParameterValue("GeneModelFile"));
     } catch (ClassNotFoundException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
 
-  
   public Map<IntPair, Double> detect(String text) throws Exception {
     Map<IntPair, Double> tokens = new HashMap<IntPair, Double>();
-    
+
     char[] cs = text.toCharArray();
-    Iterator<Chunk> it = chunker.nBestChunks(cs, 0, cs.length, 80);
+    Iterator<Chunk> it = sChunker.nBestChunks(cs, 0, cs.length, 80);
     while (it.hasNext()) {
       Chunk chunk = it.next();
-      double conf = Math.pow(2.0,chunk.score());
+      double conf = Math.pow(2.0, chunk.score());
       int start = chunk.start();
       int end = chunk.end();
-      
+
       tokens.put(new IntPair(start, end), conf);
     }
     
     return tokens;
   }
-  
+
   /**
    * @param JCas
    * @return void
    * @throws AnalysisEngineProcessException
    * 
-   * This function calls the lingpipeDetector to detect the gene name entity.
-   * It is the core function in the annotator of this system.
+   *           This function calls the lingpipeDetector to detect the gene name entity. It is the
+   *           core function in the annotator of this system.
    */
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
     // TODO Auto-generated method stub
     String sts = aJCas.getDocumentText();
-    
-    Map<IntPair, Double> abnerTokens = new HashMap<IntPair, Double>();
-    Iterator annotationIter = aJCas.getAnnotationIndex(CandidateToken.type).iterator();
-    while (annotationIter.hasNext()) {
-      CandidateToken annot = (CandidateToken) annotationIter.next();
-      abnerTokens.put(new IntPair(annot.getSt(), annot.getEd()), 1.0);
-    }
 
     try {
       Map<IntPair, Double> tokens = detect(sts);
-      
+
       Iterator it = tokens.entrySet().iterator();
       while (it.hasNext()) {
-        Map.Entry<IntPair, Double> pairs = (Map.Entry<IntPair, Double>)it.next();
-        
-        double conf = pairs.getValue();
-        if (abnerTokens.get((IntPair)pairs.getKey()) != null) {
-          conf += abnerTokens.get((IntPair)pairs.getKey());
-        }
-        else {
-          conf -= 0.1;
-        }
-        
-        if (conf < 0.63) continue;
-        
-        GeneType annotation = new GeneType(aJCas);
+        Map.Entry<IntPair, Double> pairs = (Map.Entry<IntPair, Double>) it.next();
+
+        CandidateToken annotation = new CandidateToken(aJCas);
         annotation.setSt(pairs.getKey().getX());
         annotation.setEd(pairs.getKey().getY());
+        annotation.setProcessID(PROCESS_ID);
+        annotation.setScore(pairs.getValue());
         annotation.addToIndexes();
       }
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }

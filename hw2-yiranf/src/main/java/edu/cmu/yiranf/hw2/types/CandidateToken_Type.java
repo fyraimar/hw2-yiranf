@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Oct 08 08:11:00 EDT 2014
+ * Updated by JCasGen Fri Oct 10 15:57:36 EDT 2014
  * @generated */
 public class CandidateToken_Type extends Annotation_Type {
   /** @generated 
@@ -93,6 +93,54 @@ public class CandidateToken_Type extends Annotation_Type {
     ll_cas.ll_setIntValue(addr, casFeatCode_ed, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_score;
+  /** @generated */
+  final int     casFeatCode_score;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public double getScore(int addr) {
+        if (featOkTst && casFeat_score == null)
+      jcas.throwFeatMissing("score", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    return ll_cas.ll_getDoubleValue(addr, casFeatCode_score);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setScore(int addr, double v) {
+        if (featOkTst && casFeat_score == null)
+      jcas.throwFeatMissing("score", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    ll_cas.ll_setDoubleValue(addr, casFeatCode_score, v);}
+    
+  
+ 
+  /** @generated */
+  final Feature casFeat_processID;
+  /** @generated */
+  final int     casFeatCode_processID;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public int getProcessID(int addr) {
+        if (featOkTst && casFeat_processID == null)
+      jcas.throwFeatMissing("processID", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    return ll_cas.ll_getIntValue(addr, casFeatCode_processID);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setProcessID(int addr, int v) {
+        if (featOkTst && casFeat_processID == null)
+      jcas.throwFeatMissing("processID", "edu.cmu.yiranf.hw2.types.CandidateToken");
+    ll_cas.ll_setIntValue(addr, casFeatCode_processID, v);}
+    
+  
 
 
 
@@ -112,6 +160,14 @@ public class CandidateToken_Type extends Annotation_Type {
  
     casFeat_ed = jcas.getRequiredFeatureDE(casType, "ed", "uima.cas.Integer", featOkTst);
     casFeatCode_ed  = (null == casFeat_ed) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_ed).getCode();
+
+ 
+    casFeat_score = jcas.getRequiredFeatureDE(casType, "score", "uima.cas.Double", featOkTst);
+    casFeatCode_score  = (null == casFeat_score) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_score).getCode();
+
+ 
+    casFeat_processID = jcas.getRequiredFeatureDE(casType, "processID", "uima.cas.Integer", featOkTst);
+    casFeatCode_processID  = (null == casFeat_processID) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_processID).getCode();
 
   }
 }

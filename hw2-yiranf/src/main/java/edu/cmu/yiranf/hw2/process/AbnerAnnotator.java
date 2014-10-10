@@ -14,10 +14,13 @@ import edu.cmu.yiranf.hw2.types.GeneType;
  *
  */
 public class AbnerAnnotator extends JCasAnnotator_ImplBase {
-  AbnerGeneDetector abner;
+  static final int PROCESS_ID = 1;
+  static final double ABNER_SCORE = 0.2;
+  
+  AbnerGeneDetector mAbner;
   
   public AbnerAnnotator() {
-    abner = new AbnerGeneDetector();
+    mAbner = new AbnerGeneDetector();
   }
   
   /**
@@ -32,7 +35,7 @@ public class AbnerAnnotator extends JCasAnnotator_ImplBase {
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
     // TODO Auto-generated method stub
     String sts = aJCas.getDocumentText();
-    String[] tokens = abner.process(sts);
+    String[] tokens = mAbner.process(sts);
     
     for (String token : tokens) {
       int st = sts.indexOf(token);
@@ -41,6 +44,8 @@ public class AbnerAnnotator extends JCasAnnotator_ImplBase {
       
       annotation.setSt(sts.indexOf(token));
       annotation.setEd(sts.indexOf(token) + token.length());
+      annotation.setProcessID(PROCESS_ID);
+      annotation.setScore(ABNER_SCORE);
       annotation.addToIndexes();
     }
   }
