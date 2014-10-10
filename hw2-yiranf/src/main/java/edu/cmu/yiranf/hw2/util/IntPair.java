@@ -1,5 +1,9 @@
 package edu.cmu.yiranf.hw2.util;
-
+/**
+ * A class used to store a pair of int
+ * @author yiranfei
+ *
+ */
 public class IntPair {
   int x = -1;
   int y = -1;

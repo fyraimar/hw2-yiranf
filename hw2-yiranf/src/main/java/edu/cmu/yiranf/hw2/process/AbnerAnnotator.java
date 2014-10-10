@@ -8,17 +8,15 @@ import edu.cmu.yiranf.hw2.types.CandidateToken;
 import edu.cmu.yiranf.hw2.types.GeneType;
 
 /**
- * geneDetectorAnnotator works as the analysis engine of the system. It only accepts the context of the sentence
- * and return the position of each gene name entities.
+ * AbnerAnnotator works as the first analysis engine of the system. It only accepts the context of the sentence
+ * and return an array of tokens 
  * @author fyr
  *
  */
 public class AbnerAnnotator extends JCasAnnotator_ImplBase {
-  //lingpipeDetector ner;
   AbnerGeneDetector abner;
   
   public AbnerAnnotator() {
-     //ner = new lingpipeDetector();
     abner = new AbnerGeneDetector();
   }
   
@@ -27,8 +25,8 @@ public class AbnerAnnotator extends JCasAnnotator_ImplBase {
    * @return void
    * @throws AnalysisEngineProcessException
    * 
-   * This function calls the lingpipeDetector to detect the gene name entity.
-   * It is the core function in the annotator of this system.
+   * This function call the abner engine to detect the gene name entity.
+   * It is the core function of the 1st AE of this system.
    */
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
@@ -43,7 +41,6 @@ public class AbnerAnnotator extends JCasAnnotator_ImplBase {
       
       annotation.setSt(sts.indexOf(token));
       annotation.setEd(sts.indexOf(token) + token.length());
-      
       annotation.addToIndexes();
     }
   }

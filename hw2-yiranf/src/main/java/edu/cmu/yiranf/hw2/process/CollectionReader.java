@@ -62,15 +62,12 @@ public class CollectionReader extends CollectionReader_ImplBase {
       br = new BufferedReader(new FileReader(((String) getConfigParameterValue(INPUT_PATH))));
       String line = br.readLine();
       while (line != null) {
-        //System.out.println(mCurrentIndex);
         mSentences.add(line);
         line = br.readLine();
       }
     } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     
