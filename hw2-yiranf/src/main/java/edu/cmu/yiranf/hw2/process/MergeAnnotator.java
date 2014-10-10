@@ -17,8 +17,8 @@ import edu.cmu.yiranf.hw2.types.GeneType;
 import edu.cmu.yiranf.hw2.util.IntPair;
 
 /**
- * geneDetectorAnnotator works as the analysis engine of the system. It only accepts the context of
- * the sentence and return the position of each gene name entities.
+ * MergeAnnotator retrieve these candidate tokens from abner and lingpipe, compare their results and
+ * mark some of these tokens as the gene according to scores.
  * 
  * @author fyr
  *
@@ -35,8 +35,7 @@ public class MergeAnnotator extends JCasAnnotator_ImplBase {
    * @return void
    * @throws AnalysisEngineProcessException
    * 
-   *           This function calls the lingpipeDetector to detect the gene name entity. It is the
-   *           core function in the annotator of this system.
+   *           This function merges the result.
    */
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
@@ -44,13 +43,13 @@ public class MergeAnnotator extends JCasAnnotator_ImplBase {
 
     Map<IntPair, Double> abnerTokens = new HashMap<IntPair, Double>();
     Map<IntPair, Double> lingpipeTokens = new HashMap<IntPair, Double>();
-    
+
     Iterator annotationIter = aJCas.getAnnotationIndex(CandidateToken.type).iterator();
     while (annotationIter.hasNext()) {
       CandidateToken annot = (CandidateToken) annotationIter.next();
       if (annot.getProcessID() == 1) {
         abnerTokens.put(new IntPair(annot.getSt(), annot.getEd()), annot.getScore());
-        //System.out.println("#1 add");
+        // System.out.println("#1 add");
       } else {
         lingpipeTokens.put(new IntPair(annot.getSt(), annot.getEd()), annot.getScore());
       }
@@ -61,7 +60,7 @@ public class MergeAnnotator extends JCasAnnotator_ImplBase {
       Map.Entry<IntPair, Double> pairs = (Map.Entry<IntPair, Double>) it.next();
 
       double conf = pairs.getValue();
-      
+
       if (abnerTokens.get((IntPair) pairs.getKey()) != null) {
         conf += abnerTokens.get((IntPair) pairs.getKey());
       } else {
@@ -70,8 +69,6 @@ public class MergeAnnotator extends JCasAnnotator_ImplBase {
 
       if (conf < 0.63)
         continue;
-      
-      
 
       GeneType annotation = new GeneType(aJCas);
       annotation.setSt(pairs.getKey().getX());

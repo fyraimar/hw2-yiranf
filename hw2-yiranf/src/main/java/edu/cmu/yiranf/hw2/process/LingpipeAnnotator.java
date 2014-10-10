@@ -1,8 +1,6 @@
 package edu.cmu.yiranf.hw2.process;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,35 +9,31 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceAccessException;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 
 import com.aliasi.chunk.Chunk;
 import com.aliasi.chunk.ConfidenceChunker;
 import com.aliasi.util.AbstractExternalizable;
 
 import edu.cmu.yiranf.hw2.types.CandidateToken;
-import edu.cmu.yiranf.hw2.types.GeneType;
 import edu.cmu.yiranf.hw2.util.IntPair;
 
 /**
- * geneDetectorAnnotator works as the analysis engine of the system. It only accepts the context of
- * the sentence and return the position of each gene name entities.
+ * LingpipeAnnotator works as the analysis engine of the system. It only accepts the context of the
+ * sentence and return the position of each gene name entities with a score and a processid '2'.
  * 
  * @author fyr
  *
  */
 public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
-  static final int PROCESS_ID = 2;
+  private static final int PROCESS_ID = 2;
 
-  static ConfidenceChunker sChunker;
+  private static ConfidenceChunker sChunker;
 
   public void initialize(UimaContext aContext) throws ResourceInitializationException {
     super.initialize(aContext);
 
     try {
-      System.out.println((String) aContext.getConfigParameterValue("GeneModelFile"));
       sChunker = (ConfidenceChunker) AbstractExternalizable.readResourceObject(
               LingpipeAnnotator.class, (String) aContext.getConfigParameterValue("GeneModelFile"));
     } catch (ClassNotFoundException e) {
@@ -49,6 +43,13 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
     }
   }
 
+  /**
+   * @param text
+   * @return Map<Intpair, Double>
+   * @throws Exception
+   * 
+   *           Use Lingpipe to get a map of candidate tokens with scores.
+   */
   public Map<IntPair, Double> detect(String text) throws Exception {
     Map<IntPair, Double> tokens = new HashMap<IntPair, Double>();
 
@@ -62,7 +63,7 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
 
       tokens.put(new IntPair(start, end), conf);
     }
-    
+
     return tokens;
   }
 

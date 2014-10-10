@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package edu.cmu.yiranf.hw2.process;
+package edu.cmu.yiranf.hw2.reader;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -51,11 +51,13 @@ import edu.cmu.yiranf.hw2.types.Sentence;
  */
 public class CollectionReader extends CollectionReader_ImplBase {
   public static final String INPUT_PATH = "InputDirectory";
-  private ArrayList<String> mSentences;
+  
   private int mCurrentIndex;
+  private ArrayList<String> mSentences;
 
   public void initialize() throws ResourceInitializationException {
     mSentences = new ArrayList<String>();
+    
     BufferedReader br;
     
     try {
@@ -90,7 +92,7 @@ public class CollectionReader extends CollectionReader_ImplBase {
     String text = mSentences.get(mCurrentIndex++);
     jcas.setDocumentText(text.substring(15, text.length()));
     
-    //Store information for consumer
+    //Store information for Consumer
     Sentence st = new Sentence(jcas);
     st.setSentenceId(text.substring(0, 14));
     st.setSentence(text.substring(15, text.length()));

@@ -23,7 +23,7 @@
      filesystem.  The Java class for this collection reader is in uima_core.jar. -->
 <collectionReaderDescription xmlns="http://uima.apache.org/resourceSpecifier">
     <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-    <implementationName>edu.cmu.yiranf.hw2.process.CollectionReader</implementationName>
+    <implementationName>edu.cmu.yiranf.hw2.reader.CollectionReader</implementationName>
     <processingResourceMetaData>
         <name>File System Collection Reader</name>
         <version>1.0</version>

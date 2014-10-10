@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package edu.cmu.yiranf.hw2.process;
+package edu.cmu.yiranf.hw2.consumer;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -35,10 +35,9 @@ import edu.cmu.yiranf.hw2.types.GeneType;
 import edu.cmu.yiranf.hw2.types.Sentence;
 
 /**
- * The casPrinter works as the CAS consumer of this system.
- * It receives information from 2 sources:
- * 1. Get sentence id and the original sentences from class collectionReader. 
- * 2. Get the start point and end point of the Gene Name from class geneDetectorAnnotator.
+ * The casPrinter works as the CAS consumer of this system. It receives information from 2 sources:
+ * 1. Get sentence id and the original sentences from class collectionReader. 2. Get the start point
+ * and end point of the Gene Name from class geneDetectorAnnotator.
  * 
  * casPrinter retrieve the name entities according to the positions provided by the AE engine,
  * delete these extra spaces and print out these information to the output file in specific format.
@@ -47,8 +46,9 @@ import edu.cmu.yiranf.hw2.types.Sentence;
  *
  */
 public class CasPrinter extends CasConsumer_ImplBase implements CasObjectProcessor {
-  File outFile;
-  FileWriter fileWriter;
+  private File mOutFile;
+
+  private FileWriter mFileWriter;
 
   public CasPrinter() {
   }
@@ -56,9 +56,9 @@ public class CasPrinter extends CasConsumer_ImplBase implements CasObjectProcess
   public void initialize() throws ResourceInitializationException {
 
     // Create the output file
-    outFile = new File("hw2-yiranf.out");
+    mOutFile = new File("hw2-yiranf.out");
     try {
-      fileWriter = new FileWriter(outFile);
+      mFileWriter = new FileWriter(mOutFile);
     } catch (IOException e) {
       throw new ResourceInitializationException(e);
     }
@@ -71,7 +71,7 @@ public class CasPrinter extends CasConsumer_ImplBase implements CasObjectProcess
     } catch (CASException e) {
       throw new ResourceProcessException(e);
     }
-    
+
     // get the sentence id and context
     Iterator it = jcas.getAnnotationIndex(Sentence.type).iterator();
     String sid = "";
@@ -81,29 +81,32 @@ public class CasPrinter extends CasConsumer_ImplBase implements CasObjectProcess
       sid = st.getSentenceId();
       originText = st.getSentence();
     }
-    
+
     Iterator annotationIter = jcas.getAnnotationIndex(GeneType.type).iterator();
     while (annotationIter.hasNext()) {
       GeneType annot = (GeneType) annotationIter.next();
 
-      //Calculate spaces before the NE
+      // Calculate spaces before the NE
       int cur = 0;
       int countSpc1 = 0;
       while (cur <= (annot.getSt()))
-        if (originText.charAt(cur++) == ' ') countSpc1++;
-      
-      //Calculate spaces inside the NE
+        if (originText.charAt(cur++) == ' ')
+          countSpc1++;
+
+      // Calculate spaces inside the NE
       cur = annot.getSt();
       int countSpc2 = 0;
       while (cur < (annot.getEd()))
-        if (originText.charAt(cur++) == ' ') countSpc2++;
-      
+        if (originText.charAt(cur++) == ' ')
+          countSpc2++;
+
       try {
-        //Get the id and gene name entities and output to the file
-        fileWriter.write(sid + "|");
-        fileWriter.write((annot.getSt()-countSpc1) + " " + (annot.getEd()-countSpc1-countSpc2-1) + "|");
-        fileWriter.write((originText.substring(annot.getSt(), annot.getEd())) + '\n');
-        fileWriter.flush();
+        // Get the id and gene name entities and output to the file
+        mFileWriter.write(sid + "|");
+        mFileWriter.write((annot.getSt() - countSpc1) + " "
+                + (annot.getEd() - countSpc1 - countSpc2 - 1) + "|");
+        mFileWriter.write((originText.substring(annot.getSt(), annot.getEd())) + '\n');
+        mFileWriter.flush();
       } catch (IOException e) {
         throw new ResourceProcessException(e);
       }
@@ -111,9 +114,9 @@ public class CasPrinter extends CasConsumer_ImplBase implements CasObjectProcess
   }
 
   public void destroy() {
-    if (fileWriter != null) {
+    if (mFileWriter != null) {
       try {
-        fileWriter.close();
+        mFileWriter.close();
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
