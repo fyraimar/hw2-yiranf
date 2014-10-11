@@ -56,7 +56,7 @@ public class CasPrinter extends CasConsumer_ImplBase implements CasObjectProcess
   public void initialize() throws ResourceInitializationException {
 
     // Create the output file
-    mOutFile = new File("hw2-yiranf.out");
+    mOutFile = new File(((String) getConfigParameterValue("outputFile")));
     try {
       mFileWriter = new FileWriter(mOutFile);
     } catch (IOException e) {

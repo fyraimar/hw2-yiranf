@@ -46,7 +46,7 @@
 				<nameValuePair>
 					<name>outputFile</name>
 					<value>
-						<string>src/main/resources/data/hw2-yiranf.out</string>
+						<string>hw2-yiranf.out</string>
 					</value>
 				</nameValuePair>
 			</configurationParameterSettings>
